@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazmul HA Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .card:hover {
+          transform: scale(1.05);
+          transition: transform 0.3s;
+        }
+    </style>
+      
+</head>
+
+<!--Body Area-->
+<body>
+    <header class="fixed top-0 w-full bg-white shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center px-6 py-4">
+          <h1 class="text-xl font-bold">TravelPro</h1>
+          
+          <!-- Navigation Menu for Desktop -->
+          <nav class="hidden md:block">
+            <ul class="flex space-x-6">
+              <li><a href="#home" class="hover:text-blue-600">Home</a></li>
+              <li><a href="#destinations" class="hover:text-blue-600">Destinations</a></li>
+              <li><a href="#packages" class="hover:text-blue-600">Packages</a></li>
+              <li><a href="#about" class="hover:text-blue-600">About Us</a></li>
+              <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
+            </ul>
+          </nav>
+      
+          <!-- Mobile Hamburger Menu Icon -->
+          <div class="md:hidden flex items-center">
+            <button id="hamburgerIcon" class="text-2xl">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      
+        <!-- Mobile Menu Dropdown -->
+        <nav id="mobileMenu" class="hidden md:hidden bg-white shadow-md">
+          <ul class="flex flex-col items-center space-y-4 py-4">
+            <li><a href="#home" class="hover:text-blue-600">Home</a></li>
+            <li><a href="#destinations" class="hover:text-blue-600">Destinations</a></li>
+            <li><a href="#packages" class="hover:text-blue-600">Packages</a></li>
+            <li><a href="#about" class="hover:text-blue-600">About Us</a></li>
+            <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <div class="relative bg-cover bg-center h-[540px] sm:h-[400px] md:h-[480px] lg:h-[540px] shadow-lg" style="background-image: url('/Search-bg.jpg');">
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-black/30"></div>
+    
+        <div class="relative flex flex-col items-center justify-center h-full space-y-6 px-4 sm:px-6">
+            <!-- Hero Text -->
+            <h1 class="text-white font-extrabold drop-shadow-lg text-center leading-none text-4xl sm:text-5xl md:text-6xl">
+                <span class="inline-block tracking-wide pt-8">Explore The</span>
+                <br />
+                <span class="inline-block tracking-wide">
+                    World With Us
+                </span>
+            </h1>
+            <p class="md:pb-10 text-yellow-200 text-sm sm:text-base md:text-lg md:px-20 text-center">
+                France - England - Tokyo - Turkey - Dubai - Maldives - Thailand - Australia - Greece - Spain - Czech Republic
+            </p>
+                    
+            <!-- Search Container -->
+            <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-2 relative w-full max-w-[500px]">
+                <!-- Airplane Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 36 36">
+                    <title>Airplane Icon</title>
+                    <path d="M6.25,11.5,12,13.16l6.32-4.59-9.07.26A.52.52,0,0,0,9,8.91L6.13,10.56A.51.51,0,0,0,6.25,11.5Z"></path>
+                    <path d="M34.52,6.36,28.22,5a3.78,3.78,0,0,0-3.07.67L6.12,19.5l-4.57-.2a1.25,1.25,0,0,0-.83,2.22l4.45,3.53a.55.55,0,0,0,.53.09c1.27-.49,6-3,11.59-6.07l1.12,11.51a.55.55,0,0,0,.9.37l2.5-2.08a.76.76,0,0,0,.26-.45l2.37-13.29c4-2.22,7.82-4.37,10.51-5.89A1.55,1.55,0,0,0,34.52,6.36Z"></path>
+                </svg>
+                
+                <!-- Input Field -->
+                <div class="relative w-full">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        class="outline-none bg-transparent text-white placeholder-gray-200 w-full focus:ring-0 focus:outline-none border-b-2 border-white focus:border-blue-500 transition"
+                        placeholder="Search for destinations..."
+                        onkeyup="filterDestinations()"
+                    />
+                    <!-- Dropdown List -->
+                    <ul
+                        id="destinationDropdown"
+                        class="absolute bg-white text-gray-700 w-full mt-2 rounded-md shadow-md hidden max-h-40 overflow-y-auto"
+                    >
+                        <!-- Destination items will be injected here -->
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- Book Now Button -->
+            <button
+                class="bg-blue-500 text-white rounded-full px-6 py-3 shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-300 mt-6 font-semibold text-[14px]">
+                Book Now
+            </button>
+        </div>
+    </div>
+
+    <section id="done" class="relative bg-cover bg-center py-32" style="background-image: url('path-to-background-image.jpg');">
+        <div class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center text-center text-white">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Poetry in Motion</h2>
+            <p class="text-base sm:text-lg md:text-xl font-medium max-w-3xl mx-auto px-4">
+                "The journey’s not about the destination, it’s about the memories made along the way. 
+                Every path leads to a story, every stop has its own tale, 
+                and in every moment lies a spark of wonder waiting to ignite the heart."
+            </p>
+        </div>
+    </section>
+    
+    
+    
+    <section id="home" class="relative bg-cover bg-center md:h-screen h-72" style="background-image: url('/hero.jpg');">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white px-6">
+            <!-- Title -->
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">Discover New Horizons</h2>
+            
+            <!-- Subtitle -->
+            <p class="text-base sm:text-lg md:text-xl mb-6 max-w-2xl mx-auto">
+                Travel to the most beautiful destinations around the world with ease and comfort.
+            </p>
+        </div>
+    </section>    
+    
+
+    <section id="destinations" class="py-16 md:px-8 px-4 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h3 class="text-3xl font-bold mb-2">Popular Destinations</h3>
+            <p class="text-sm font-bold mb-8"> Click for display price or booking</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Destination Card -->
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/PARIS.jpg" alt="PARIS" class="w-full h-48 object-cover">
+                    <!-- Overlay -->
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 20,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 25,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <!-- Card Content -->
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Paris, France</h4>
+                        <p class="text-gray-600 mt-2">Known For : Eiffel Tower  The Louvre  Notre Dame</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/LONDON.jpg" alt="LONDON" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 17,500 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 22,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">London, England</h4>
+                        <p class="text-gray-600 mt-2">Known For : Tower of London  British Museum  London Eye</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/PAMUKALLE.jpg" alt="PAMUKALLE" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 26,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 31,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Pamukkale, Turkey</h4>
+                        <p class="text-gray-600 mt-2">Known For : Pamukkale Natural Park  Travertines  Hierapolis</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/DUBAI.jpg" alt="DUBAI" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 14,500 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 15,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Dubai, UAE</h4>
+                        <p class="text-gray-600 mt-2">Known For :  At the Top Burj Khalifa  Global Village Dubai  Dubai Fountain</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/MALDIVES.jpg" alt="MALDIVES" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 32,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 35,500 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Maldives</h4>
+                        <p class="text-gray-600 mt-2">Known For : Stay in an Overwater Bungalow  Diving in Maldives  Snorkelling in Maldives</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/BANGKOK.jpg" alt="BANGKOK" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 27,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 31,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Bangkok, Thailand</h4>
+                        <p class="text-gray-600 mt-2">Known For :  Grand Palace  Chatuchak Market  Wat Phra Kaew</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/GREAT-BARRIER-REEF.jpg" alt="GREAT-BARRIER-REEF" class="w-full h-48 object-cover">
+                    <!-- Overlay -->
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 20,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 25,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <!-- Card Content -->
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Great Barrier Reef, Australia</h4>
+                        <p class="text-gray-600 mt-2">Known For : Green Island  Heart Reef  Hayman Island</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/SANTORINI.jpg" alt="SANTORINI" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 17,500 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 22,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Santorini, Greece</h4>
+                        <p class="text-gray-600 mt-2">Known For: Watch Sunset at Oia  Hike from Fira to Oia  Skaros Rock</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/SYDNEY.jpg" alt="Sydney" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 26,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 31,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Sydney, Australia</h4>
+                        <p class="text-gray-600 mt-2">Known For: Sydney Opera House  Sydney Harbour Bridge  Royal Botanic Gardens</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/PHUKET.jpg" alt="PHUKET" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 14,500 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 15,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Phuket, Thailand</h4>
+                        <p class="text-gray-600 mt-2">Known For: Bangla Road  Phuket Old Town  Phi Phi Islands</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/BARCELONA.jpg" alt="BARCELONA" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 32,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 35,500 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Barcelona, Spain</h4>
+                        <p class="text-gray-600 mt-2">Known For: Sagrada Familia  Las Ramblas  Park Guell</p>
+                    </div>
+                </div>
+
+                <div class="bg-white shadow-md rounded-lg overflow-hidden relative group">
+                    <img src="/PRAGUE.jpg" alt="PRAGUE" class="w-full h-48 object-cover">
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-lg font-semibold mb-1">Discount Price: 27,000 BDT</p>
+                        <p class="text-lg line-through text-red-500 mb-4">Price: 31,000 BDT</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Book Now</button>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-xl">Prague, Czech-Republic</h4>
+                        <p class="text-gray-600 mt-2">Known For: Prague Castle  Charles Bridge  Old Town Square Prague</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+      
+    <section id="packages" class="py-16 md:mx-8 mx-4">
+        <div class="container mx-auto">
+            <h3 class="text-3xl font-bold text-center mb-8">Travel Packages</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+                <!-- 3-Star Package -->
+                <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <img src="/3-Star.jpg" alt="3-Star Package" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="text-xl font-bold">3-Star Package</h4>
+                        <p class="text-gray-600 mt-2">5 days, budget-friendly accommodations, basic meals included.</p>
+                        <div class="mt-4">
+                            <p class="text-sm font-semibold">Extra Cost:</p>
+                            <p class="text-sm">Couple: Free</p>
+                            <p class="text-sm">Family: +5000 BDT</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- 5-Star Package -->
+                <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <img src="/5-Star.jpg" alt="5-Star Package" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="text-xl font-bold">5-Star Package</h4>
+                        <p class="text-gray-600 mt-2">7 days, luxury accommodations, gourmet meals included.</p>
+                        <div class="mt-4">
+                            <p class="text-sm font-semibold">Extra Cost:</p>
+                            <p class="text-sm">Couple: +15,000 BDT</p>
+                            <p class="text-sm">Family: +25,000 BDT</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- 7-Star Package -->
+                <div class="bg-white shadow-md rounded-lg overflow-hidden">
+                    <img src="/7-Star.jpg" alt="7-Star Package" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h4 class="text-xl font-bold">7-Star Package</h4>
+                        <p class="text-gray-600 mt-2">10 days, ultra-luxury accommodations, exclusive experiences.</p>
+                        <div class="mt-4">
+                            <p class="text-sm font-semibold">Extra Cost:</p>
+                            <p class="text-sm">Couple: +30,000 BDT</p>
+                            <p class="text-sm">Family: +50,000 BDT</p>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="py-16 bg-gray-100 md:px-8 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+          <div class="md:w-1/2">
+            <h3 class="text-3xl font-bold mb-4">About Us</h3>
+            <p>Our mission is to make your travel experience unforgettable. We offer a variety of packages to meet your needs.</p>
+          </div>
+          <div class="md:w-1/2">
+            <img src="/AboutBG.jpg" alt="About Us" class="rounded-lg shadow-md">
+          </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="py-16 px-4">
+        <div class="container mx-auto">
+          <h3 class="text-3xl font-bold text-center mb-8">Contact Us</h3>
+          <form class="max-w-md mx-auto">
+            <input type="text" placeholder="Name" class="block w-full p-4 border rounded mb-4">
+            <input type="email" placeholder="Email" class="block w-full p-4 border rounded mb-4">
+            <textarea placeholder="Message" class="block w-full p-4 border rounded mb-4"></textarea>
+            <button class="w-full bg-blue-600 text-white py-3 rounded">Submit</button>
+          </form>
+        </div>
+    </section>
+      
+    <footer class="bg-gray-800 text-white py-6 px-4">
+        <div class="container mx-auto text-center">
+          <p>&copy; 2024 TravelPro. All Rights Reserved.</p>
+          <div class="flex justify-center space-x-4 mt-4">
+            <a href="#" class="hover:text-blue-600">Facebook</a>
+            <a href="#" class="hover:text-blue-600">Instagram</a>
+            <a href="#" class="hover:text-blue-600">Twitter</a>
+          </div>
+        </div>
+    </footer>
+
+    <script>
+
+<!-- JavaScript for Toggle -->
+     const hamburgerIcon = document.getElementById("hamburgerIcon");
+     const mobileMenu = document.getElementById("mobileMenu");
+
+    // Toggle the mobile menu visibility on click
+     hamburgerIcon.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+        // List of destinations
+        const destinations = [
+            "Paris, France", "London, England", "Pamukkale, Turkey", "Dubai, UAE", "Maldives",
+            "Bangkok, Thailand", "Great Barrier Reef, Australia", "Santorini, Greece", "Sydney, Australia", "Phuket, Thailand", "Barcelona, Spain", "Prague, Czech Republic"
+        ];
+    
+        const searchInput = document.getElementById("searchInput");
+        const dropdown = document.getElementById("destinationDropdown");
+    
+        function filterDestinations() {
+            const query = searchInput.value.toLowerCase();
+            dropdown.innerHTML = ""; // Clear previous results
+    
+            if (query) {
+                const filteredDestinations = destinations.filter(destination =>
+                    destination.toLowerCase().includes(query)
+                );
+    
+                // Populate dropdown with filtered destinations
+                filteredDestinations.forEach(destination => {
+                    const li = document.createElement("li");
+                    li.textContent = destination;
+                    li.className = "p-2 hover:bg-blue-100 cursor-pointer";
+                    li.onclick = () => {
+                        searchInput.value = destination; // Set input value on click
+                        dropdown.classList.add("hidden"); // Hide dropdown
+                    };
+                    dropdown.appendChild(li);
+                });
+    
+                dropdown.classList.remove("hidden"); // Show dropdown
+            } else {
+                dropdown.classList.add("hidden"); // Hide dropdown when input is empty
+            }
+        }
+    
+        // Hide dropdown if clicked outside
+        document.addEventListener("click", (event) => {
+            if (!event.target.closest("#searchInput")) {
+                dropdown.classList.add("hidden");
+            }
+        });
+    </script>
+      
+          
+</body>
+</html>
